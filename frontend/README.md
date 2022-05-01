@@ -1,6 +1,6 @@
 # Web Frontend Generator - FRONTEND
 
-## Frontend Run
+## Frontend run
 
 #### `npm start`
 
