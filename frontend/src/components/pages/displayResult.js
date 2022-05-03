@@ -111,14 +111,14 @@ export default class displayResultPage extends Component {
                                 </div><br /><br /><br /><br /><br />
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <center><a href="#" class="btn btn-info col-12" style={{ color: 'white', fontSize: '16px' }}>Display React Code&nbsp;&nbsp;<i class="fas fa-code fa-lg"></i></a></center>
-                                        <div class="card" style={{ height: '430px' }}>
-                                            <textarea id="xmlString" cols="55" rows="65"></textarea>
+                                        <center><button href="#" class="btn btn-primary col-12" style={{ color: 'white', fontSize: '16px' }}>Display React Code&nbsp;&nbsp;<i class="fas fa-code fa-lg"></i></button></center>
+                                        <div class="card" style={{ height: '490px' }}>
+                                            <textarea id="xmlString" cols="55" rows="65" style={{ backgroundColor: '#121212', color: 'white' }}></textarea>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
-                                        <center><a href="#" class="btn btn-success col-12" style={{ color: 'white', fontSize: '16px' }}>Run Output&nbsp;&nbsp;<i class="fas fa-caret-right fa-lg"></i></a></center>
-                                        <div class="card" style={{ height: '430px' }}>
+                                        <center><button href="#" class="btn btn-primary col-12" style={{ color: 'white', fontSize: '16px' }}>Run Output&nbsp;&nbsp;<i class="fas fa-caret-right fa-lg"></i></button></center>
+                                        <div class="card" style={{ height: '490px' }}>
                                             <div class="card-body">
                                             </div>
                                         </div>

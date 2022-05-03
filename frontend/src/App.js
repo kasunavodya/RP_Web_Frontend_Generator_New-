@@ -6,6 +6,7 @@ import BrowsePage from "./components/pages/browsePage";
 import AddStylesPage from "./components/pages/addStyles";
 import DisplayResultPage from "./components/pages/displayResult";
 import DownloadCodePage from "./components/pages/downloadCode";
+import SampleReactCodePage from "./components/pages/sampleReactCode";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path="/addStyles" element={<AddStylesPage/>} />
             <Route path="/displayResult" element={<DisplayResultPage/>} />
             <Route path="/downloadCode" element={<DownloadCodePage/>} />
+            <Route path="/sampleReactCode" element={<SampleReactCodePage/>} />
           </Routes>
         </section>
       </Router>
