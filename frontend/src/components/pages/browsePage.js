@@ -8,6 +8,8 @@ import step2 from '../../assets/img/2.png';
 import step3 from '../../assets/img/3.png';
 import step4 from '../../assets/img/4.png';
 
+import Screen01 from './screen01';
+
 export default class browsePage extends Component {
     render() {
         return (
@@ -111,17 +113,18 @@ export default class browsePage extends Component {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> 
                             <br /><br /><br />
                             <center>
                                 <div class="card bg-light text-dark" style={{ width: '700px' }}>
                                     <div class="alert alert-secondary" role="alert" style={{ color: 'white', fontFamily: 'Noto Sans, sans-serif' }}>
                                         Upload Your XML File here.
                                     </div>
-                                    <div class="card-body">
+                                    <div class="card-body" style={{ height: '800px' }}>
                                         <center>
-                                            <FileUploader />
-                                            <ToastContainer />
+                                            {/* <FileUploader />
+                                            <ToastContainer /> */}
+                                            <Screen01 />
                                         </center>
                                     </div>
                                 </div></center>

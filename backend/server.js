@@ -16,8 +16,12 @@ app.use(cors());
 const UploadFileRoutes = require('./routes/uploadFile');
 const TemplateStyleRoutes = require('./routes/TemplateStyle');
 
+const ConvertToJsonRoutes = require('./routes/convertXMLToJSON');
+
 app.use("/uploadFile", UploadFileRoutes);
 app.use("/templateStyle", TemplateStyleRoutes);
+app.use("/convertToJson", ConvertToJsonRoutes);
+
 
 const PORT = process.env.PORT || 3001;
 const MONGODB_URI = process.env.MONGODB_URI;
