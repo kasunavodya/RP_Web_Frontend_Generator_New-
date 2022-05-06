@@ -59,6 +59,31 @@ const TemplateStyleSchema = new mongoose.Schema({
         trim: true 
     },
 
+    //Input Field Styles
+    inputBorderColor: { 
+        type: String,
+        required: false,
+        trim: true 
+    },
+
+    inputBorderSize: { 
+        type: String,
+        required: false,
+        trim: true 
+    },
+
+    inputBorderPattern: { 
+        type: String,
+        required: false,
+        trim: true 
+    },
+
+    inputBorderRadius: { 
+        type: String,
+        required: false,
+        trim: true 
+    },
+
     //Button Styles
     buttonBackgroundColor: { 
         type: String,
@@ -72,7 +97,7 @@ const TemplateStyleSchema = new mongoose.Schema({
         trim: true 
     },
 
-    buttonFontSize: { 
+    buttonBorderRadius: { 
         type: String,
         required: false,
         trim: true 

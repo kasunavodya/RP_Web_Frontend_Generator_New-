@@ -23,7 +23,7 @@ export default class sampleReactCodePage extends Component {
                                         placeholder="Enter Username"
                                         name="uname"
                                         required
-                                        style={{ padding: '12px 20px', margin: '8px 0', border: '2px solid #ccc', width: '100%', boxSizing: 'border-box', display: 'inline-block' }}
+                                        style={{ padding: '12px 20px', margin: '8px 0', border: '2px solid #ccc', width: '100%'}}
                                     />
                                     <br /><br />
                                     <label for="psw" style={{ float: 'left', paddingTop: '5px', fontSize: '16px' }}>
@@ -34,10 +34,10 @@ export default class sampleReactCodePage extends Component {
                                         placeholder="Enter Password"
                                         name="psw"
                                         required
-                                        style={{ padding: '12px 20px', margin: '8px 0', border: '2px solid #ccc', width: '100%', boxSizing: 'border-box', display: 'inline-block' }}
+                                        style={{ padding: '12px 20px', margin: '8px 0', border: '2px solid #ccc', width: '100%' }}
                                     />
                                     <br /><br />
-                                    <button type="submit" style={{ backgroundColor: '#4348e8', color: 'white', padding: '14px 20px', margin: '8px 0', border: 'none', borderRadius: '7px', cursor: 'pointer', width: '100%' }}>Login</button>
+                                    <button type="submit" style={{ backgroundColor: '#4348e8', color: 'white', padding: '14px 20px', margin: '8px 0', border: 'none', borderRadius: '7px', width: '100%' }}>Login</button>
                                     <br /><br /><br />
                                 </div>
                             </form>
