@@ -22,6 +22,7 @@ export const FileUploader = ({ }) => {
         axios.post('http://localhost:3001/uploadFile/upload', data)
             .then((e) => {
                 toast.success('XML File Upload Success');
+                console.log(e.data.file);
             })
             .catch((e) => {
                 toast.error('XML File Upload Error')
@@ -77,10 +78,12 @@ export const FileUploader = ({ }) => {
         <div>
             <form method="post" action="#" id="#" onSubmit={onSubmit}>
                 <div className="form-group files">
-                    <input type="file"
+                    <input type="file" 
                         onChange={onInputChange}
                         className="form-control"
-                        multiple />
+                        multiple 
+                        required 
+                        />
                 </div>
                 <button class="btn btn-primary" style={{ width: '200px' }}>Submit</button><br />
                 <button class="btn btn-primary" style={{ width: '200px' }}>Convert XML to JSON</button>
