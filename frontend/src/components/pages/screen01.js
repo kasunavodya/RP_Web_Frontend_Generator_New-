@@ -4,7 +4,8 @@ import '../../assets/css/sanjay.css';
 
 const initialStates = {
     file: '',
-    xmlFile: 'No-File'
+    xmlFile: 'No-File',
+    jsonFile: 'No-File'
 }
 
 export default class Screen01 extends Component {
@@ -100,23 +101,29 @@ export default class Screen01 extends Component {
     convertXMLToJSONFormat(e){
         e.preventDefault();
 
-        alert('Hello!' + this.state.xmlFile);
+        alert('Hello!' + JSON.stringify(this.state.xmlFile));
   
-        // Axios.post('http://localhost:3001/convertToJson/convertXmlToJson', parameter)
+        var xml = this.state.xmlFile.toString(); 
+        let pass = {
+            "xmlFile": xml
+        }
+        Axios.post('http://localhost:3001/convertToJson/convertXmlToJson', pass)
+        .then((result) => {
+            console.log('RESULT :', result.data.data);
+            this.setState({ jsonFile: result.data.data })
+        })
+        .catch((e) => {
+            console.log('Error :', e);
+        })
+
+        
+        // Axios.get(`http://localhost:3001/convertToJson/XmlToJson/${xml}`)
         // .then((data) => {
         //     console.log('RESULT :', data);
         // })
         // .catch((e) => {
         //     console.log('Error :', e);
         // })
-
-        Axios.get(`http://localhost:3001/convertToJson/XmlToJson/123`)
-        .then((data) => {
-            console.log('RESULT :', data);
-        })
-        .catch((e) => {
-            console.log('Error :', e);
-        })
 
     }
     
@@ -135,7 +142,8 @@ export default class Screen01 extends Component {
                     <button type="submit" className="btn btn-dark" id="submitBtn">Submit File</button><br />
 
                     <textarea value={this.state.xmlFile} className="textAreaStyle"></textarea><br /><br />
-                    <button type="submit" className="btn btn-secondary" id="cancelBtn" onClick={this.convertXMLToJSONFormat}>Convert</button>
+                    <button type="submit" className="btn btn-secondary" id="cancelBtn" onClick={this.convertXMLToJSONFormat}>Convert</button><br />
+                    <textarea value={this.state.jsonFile} className="textAreaStyle"></textarea><br /><br />
                 </form>
                 
                  
