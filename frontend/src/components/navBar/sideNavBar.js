@@ -39,7 +39,7 @@ export default class sideNavBar extends Component {
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link " href="/browse">
+                            <a class="nav-link " href="/convertXmltoJson">
                                 <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                     <i class="ni ni-app text-info text-sm opacity-10"></i>
                                 </div>
@@ -93,9 +93,9 @@ export default class sideNavBar extends Component {
                 </div>
                 <div class="sidenav-footer mx-3 ">
                     <a href="https://www.creative-tim.com/learning-lab/bootstrap/license/argon-dashboard" target="_blank" class="btn btn-dark btn-sm w-100 mb-3">File Formats</a>
-                    <a class="btn btn-primary btn-sm mb-0 w-100" href="https://www.creative-tim.com/product/argon-dashboard-pro?ref=sidebarfree" type="button">Supports</a><br/><br/>
-                    <a class="btn btn-primary btn-sm mb-0 w-100" href="/sampleReactCode" type="button">Sample React Template</a><br/><br/>
-                    <a class="btn btn-primary btn-sm mb-0 w-100" href="/convertXmltoJson" type="button">Copy XML File</a>
+                    <a class="btn btn-primary btn-sm mb-0 w-100" href="/addStyles" type="button">Add Styles - 1st Try</a><br /><br />
+                    <a class="btn btn-primary btn-sm mb-0 w-100" href="/sampleReactCode" type="button">Sample React Template</a><br /><br />
+                    <a class="btn btn-primary btn-sm mb-0 w-100" href="/browse" type="button">Convert to JSON - 1st Try</a>
                 </div>
             </aside>
         )

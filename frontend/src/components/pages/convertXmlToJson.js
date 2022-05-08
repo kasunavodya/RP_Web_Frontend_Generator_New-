@@ -6,7 +6,9 @@ import step3 from '../../assets/img/3.png';
 import step4 from '../../assets/img/4.png';
 import Axios from 'axios';
 import '../../assets/css/xmlToJson.css';
-//import $ from 'jquery';
+import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const initialStates = {
     file: '',
@@ -38,7 +40,8 @@ export default class convertXmlToJsonPage extends Component {
         const file = e.target.files[0];
         this.setState({ file: file });
 
-        alert('File Uploaded Successfully!!', this.state.file);
+        toast.success('File Uploaded Successfully!!', this.state.file);
+        //alert('File Uploaded Successfully!!', this.state.file);
         document.getElementById("submitBtn").disabled = false;
 
         // const storageRef = firebase.storage().ref();
@@ -108,9 +111,24 @@ export default class convertXmlToJsonPage extends Component {
     convertXMLToJSONFormat(e) {
         e.preventDefault();
 
-        alert('Hello! ' + this.state.xmlFile);
+        //alert('Hello!' + JSON.stringify(this.state.xmlFile));
+        toast.success('Converted to JSON format successfully');
 
-        // Axios.post('http://localhost:3001/convertToJson/convertXmlToJson', parameter)
+        var xml = this.state.xmlFile.toString();
+        let pass = {
+            "xmlFile": xml
+        }
+        Axios.post('http://localhost:3001/convertToJson/convertXmlToJson', pass)
+            .then((result) => {
+                console.log('RESULT :', result.data.data);
+                this.setState({ jsonFile: result.data.data })
+            })
+            .catch((e) => {
+                console.log('Error :', e);
+            })
+
+
+        // Axios.get(`http://localhost:3001/convertToJson/XmlToJson/${xml}`)
         // .then((data) => {
         //     console.log('RESULT :', data);
         // })
@@ -118,40 +136,11 @@ export default class convertXmlToJsonPage extends Component {
         //     console.log('Error :', e);
         // })
 
-        Axios.get(`http://localhost:3001/convertToJson/XmlToJson/123`)
-            .then((data) => {
-                console.log('RESULT :', data);
-            })
-            .catch((e) => {
-                console.log('Error :', e);
-            })
-
     }
 
     render() {
         return (
             <div>
-                {/* <script type='text/javascript' src='https://code.jquery.com/jquery-3.5.1.min.js'></script>
-                <script type='text/javascript' src="https://cdn.rawgit.com/abdmob/x2js/master/xml2json.js"></script>
-                <script>
-                    $(document).ready(function () {
-                        $("#xmlToJSON").click(function () {
-                            var data = $("#xmlString").val();
-                            var xmlData = "";
-                            if (data !== null && data.trim().length !== 0) {
-                                try {
-                                    xmlData = $.parseXML(data);
-                                } catch (e) {
-                                    throw e;
-                                }
-                                var X2JS = window.X2JS;
-                                var x2js = new X2JS();
-                                data = x2js.xml2json(xmlData);
-                                console.log(data);
-                            }
-                        })
-                    });
-                </script> */}
                 <body class="g-sidenav-show   bg-gray-100">
                     <div class="min-height-200 bg-primary position-absolute w-100"></div>
                     <SideNavBar />
@@ -252,7 +241,7 @@ export default class convertXmlToJsonPage extends Component {
                                     </div>
                                 </div><br /><br /><br /><br /><br /><br />
                                 <center>
-                                    <div class="card bg-light text-dark" style={{ width: '1300px', height: '1150px' }}>
+                                    <div class="card bg-light text-dark" style={{ width: '1300px', height: '1100px' }}>
                                         <div class="alert alert-secondary" role="alert" style={{ color: 'white', fontFamily: 'Noto Sans, sans-serif' }}>
                                             Upload XML file here
                                         </div>
@@ -268,6 +257,7 @@ export default class convertXmlToJsonPage extends Component {
                                                             onChange={this.onFileUpload}
                                                         />
                                                     </div>
+                                                    <ToastContainer />
                                                     <button type="submit" className="btn btn-dark" id="submitBtn" style={{ width: "200px" }}>Submit File</button><br /><br />
 
                                                     <div class="alert alert-secondary" role="alert" style={{ color: 'white', fontFamily: 'Noto Sans, sans-serif' }}>
@@ -288,15 +278,15 @@ export default class convertXmlToJsonPage extends Component {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <button type="submit" className="btn btn-primary" id="xmlToJSON" onClick={this.convertXMLToJSONFormat} style={{ marginTop: "-640px", width: "200px" }}>Convert XML to JSON</button><br /><br />
-                                                    <button type="submit" className="btn btn-primary" style={{ marginTop: "-620px", width: "200px" }}>Submit JSON File</button>
+                                                    <button type="submit" className="btn btn-primary" id="xmlToJSON" onClick={this.convertXMLToJSONFormat} style={{ marginTop: "-620px", width: "200px" }}>Convert XML to JSON</button><br /><br />
+                                                    <button type="submit" className="btn btn-primary" style={{ marginTop: "-590px", width: "200px" }}>Submit JSON File</button>
                                                 </form>
                                             </center>
                                         </div>
                                     </div></center>
                             </div><br />
                             <div class="col-12 text-end">
-                                <a class="btn bg-gradient-dark mb-0" href="/addStyles">Next&nbsp;&nbsp;<i class="fas fa-arrow-right"></i></a>
+                                <a class="btn bg-gradient-dark mb-0" href="/preDefineStyles">Next&nbsp;&nbsp;<i class="fas fa-arrow-right"></i></a>
                             </div>
                         </div>
                     </main>

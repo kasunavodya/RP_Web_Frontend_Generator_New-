@@ -113,7 +113,8 @@ export default class displayResultPage extends Component {
                                     <div class="col-sm-6">
                                         <center><button href="#" class="btn btn-primary col-12" style={{ color: 'white', fontSize: '16px' }}>Display React Code&nbsp;&nbsp;<i class="fas fa-code fa-lg"></i></button></center>
                                         <div class="card" style={{ height: '490px' }}>
-                                            <textarea id="xmlString" cols="55" rows="65" style={{ backgroundColor: '#121212', color: 'white' }}></textarea>
+                                            <textarea id="xmlString" cols="55" rows="65" style={{ backgroundColor: '#121212', color: 'white' }}>
+                                            </textarea>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
@@ -127,7 +128,7 @@ export default class displayResultPage extends Component {
                             </div>
                             <br />
                             <div class="col-12 text-end">
-                                <a class="btn bg-gradient-dark mb-0" href="/addStyles"><i class="fas fa-arrow-left"></i>&nbsp;&nbsp;Back</a>
+                                <a class="btn bg-gradient-dark mb-0" href="/preDefineStyles"><i class="fas fa-arrow-left"></i>&nbsp;&nbsp;Back</a>
                                 &nbsp;&nbsp;&nbsp;
                                 <a class="btn bg-gradient-dark mb-0" href="/downloadCode">Next&nbsp;&nbsp;<i class="fas fa-arrow-right"></i></a>
                             </div>

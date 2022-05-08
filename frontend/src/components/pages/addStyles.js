@@ -5,6 +5,9 @@ import step1 from '../../assets/img/1.png';
 import step2 from '../../assets/img/2.png';
 import step3 from '../../assets/img/3.png';
 import step4 from '../../assets/img/4.png';
+import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const initialStates = {
     formBackgroundColor: '',
@@ -89,7 +92,8 @@ export default class addStylesPage extends Component {
             }
             Axios.post('http://localhost:3001/templateStyle/addTemplateStyle', templateStyle)
                 .then(response => {
-                    alert('Style Details Added Successfully');
+                    //alert('Style Details Added Successfully');
+                    toast.success('Style Details Added Successfully');
                 }).catch(error => {
                     alert(error.message);
                 })
@@ -280,6 +284,7 @@ export default class addStylesPage extends Component {
                                         Or <br />select the your own styles and click the <b>'Submit'</b> button.
                                     </div>
                                     <div class="card-body">
+                                        <ToastContainer />
                                         <div class="container">
                                             <form class="form-inline" onSubmit={this.onSubmit}>
                                                 <div class="row">
@@ -483,7 +488,7 @@ export default class addStylesPage extends Component {
                             </center>
                             <br />
                             <div class="col-12 text-end">
-                                <a class="btn bg-gradient-dark mb-0" href="/browse"><i class="fas fa-arrow-left"></i>&nbsp;&nbsp;Back</a>
+                                <a class="btn bg-gradient-dark mb-0" href="/convertXmltoJson"><i class="fas fa-arrow-left"></i>&nbsp;&nbsp;Back</a>
                                 &nbsp;&nbsp;&nbsp;
                                 <a class="btn bg-gradient-dark mb-0" href="/displayResult">Next&nbsp;&nbsp;<i class="fas fa-arrow-right"></i></a>
                             </div>
