@@ -30,7 +30,7 @@ export default class dashboard extends Component {
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link me-2" href="/browse">
+                                        <a class="nav-link me-2" href="/convertXmltoJson">
                                             <i class="fa fa-chart-pie opacity-6  me-1"></i>
                                             Web Frontend Generator
                                         </a>

@@ -14,7 +14,7 @@ router.route('/convertXmlToJson').post(async (req, res) => {
         parser.parseString(req.body.xmlFile, function(error, result) {
             if(error === null) {
                 console.log(result);
-                res.status(200).send({ data: JSON.stringify(result) });
+                res.status(200).send({ data: JSON.stringify(result, null, 1) });
             }
             else {
                 console.log('Error', error);
@@ -28,4 +28,3 @@ router.route('/XmlToJson/:xml').get(async (req, res) => {
 });
 
 module.exports = router;
-

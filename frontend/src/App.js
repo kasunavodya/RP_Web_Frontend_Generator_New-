@@ -8,6 +8,7 @@ import DisplayResultPage from "./components/pages/displayResult";
 import DownloadCodePage from "./components/pages/downloadCode";
 import SampleReactCodePage from "./components/pages/sampleReactCode";
 import ConvertXmlToJsonPage from "./components/pages/convertXmlToJson";
+import PreDefineStylesPage from "./components/pages/selectPreDefineStyles";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path="/downloadCode" element={<DownloadCodePage />} />
             <Route path="/sampleReactCode" element={<SampleReactCodePage />} />
             <Route path="/convertXmltoJson" element={<ConvertXmlToJsonPage/>} />
+            <Route path="/preDefineStyles" element={<PreDefineStylesPage/>} />
           </Routes>
         </section>
       </Router>
