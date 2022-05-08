@@ -5,7 +5,32 @@ import step2 from '../../assets/img/2.png';
 import step3 from '../../assets/img/3.png';
 import step4 from '../../assets/img/4.png';
 
+//Sanjay
+import sampleCode from '../../SampleCode/sampleCode.txt';
+import ReactUI from './ReactUI.js';
+
+const initialStates = {
+    "code": ""
+}
 export default class displayResultPage extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = initialStates;
+    }
+
+    componentDidMount(e){
+        let resultantCode = "";
+
+        fetch(sampleCode)
+            .then((res) => {
+                return res.text();
+            }).then((data) => {
+                this.setState({ code: data.toString() });
+                console.log('RESULT : ', this.state.code);
+            });
+    }
+
     render() {
         return (
             <div>
@@ -113,15 +138,14 @@ export default class displayResultPage extends Component {
                                     <div class="col-sm-6">
                                         <center><button href="#" class="btn btn-primary col-12" style={{ color: 'white', fontSize: '16px' }}>Display React Code&nbsp;&nbsp;<i class="fas fa-code fa-lg"></i></button></center>
                                         <div class="card" style={{ height: '490px' }}>
-                                            <textarea id="xmlString" cols="55" rows="65" style={{ backgroundColor: '#121212', color: 'white' }}>
+                                            <textarea id="xmlString" cols="55" rows="65" style={{ backgroundColor: '#121212', color: 'white', fontSize: 11 }} defaultValue={this.state.code}>
                                             </textarea>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <center><button href="#" class="btn btn-primary col-12" style={{ color: 'white', fontSize: '16px' }}>Run Output&nbsp;&nbsp;<i class="fas fa-caret-right fa-lg"></i></button></center>
                                         <div class="card" style={{ height: '490px' }}>
-                                            <div class="card-body">
-                                            </div>
+                                            <ReactUI />
                                         </div>
                                     </div>
                                 </div>

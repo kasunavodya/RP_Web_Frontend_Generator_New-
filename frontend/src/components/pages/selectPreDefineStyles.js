@@ -11,8 +11,44 @@ import style5 from '../../assets/img/style5.jpg';
 import style6 from '../../assets/img/style6.jpg';
 import '../../assets/css/preDefineStyles.css';
 
+import Axios from 'axios';
+
+const initialStates = {
+    "templateDetails": [],
+}
 export default class preDefineStylesPage extends Component {
 
+    constructor(props) {
+        super(props);
+        this.handleTemplateSelect = this.handleTemplateSelect.bind(this);
+        this.state = initialStates;
+    }
+
+    handleTemplateSelect(e){
+        e.preventDefault();
+
+        let templateValue = e.target.value;
+
+        Axios.get(`http://localhost:3001/templateStyle/getTemplateDetails/${templateValue}`)
+        .then(result => {
+            //console.log('RESULT >>', result.data.dataresult.data.data);
+            this.setState({ templateDetails: result.data.data });
+
+            if(result.data.data.length == 0){
+                alert('Template has no details');
+            }else{
+                console.log(result.data.data)
+                console.log('VALUE : ',this.state.templateDetails);
+            }
+
+        }).then(() => {}).catch(error => {
+            alert('Error :', error);
+        });
+
+        // this.state.templateDetails.map((item, index) =>{
+        //     console.log('ITEM DETECTED : ', item.formBackgroundColor);
+        // });
+    }
     render() {
         return (
             <div>
@@ -153,10 +189,10 @@ export default class preDefineStylesPage extends Component {
                                                     <div class="container">
                                                         <form class="form-inline" onSubmit={this.onSubmit}>
                                                             <h3>Style Form</h3><br />
-                                                            <select name="templateStyle" id="templateStyle" style={{ width: '100%', height: '50px', borderColor: '#e0dada', borderRadius: '6px', backgroundColor: '#dce6df' }}>
+                                                            <select name="templateStyle" onChange={this.handleTemplateSelect} id="templateStyle" style={{ width: '100%', height: '50px', borderColor: '#e0dada', borderRadius: '6px', backgroundColor: '#dce6df' }}>
                                                                 <option disabled selected value>&nbsp;&nbsp;Select Template Style</option>
                                                                 <option value="style1">&nbsp;&nbsp;Template Style - 01</option>
-                                                                <option value="style2">&nbsp;&nbsp;Template Style - 02 </option>
+                                                                <option value="template02">&nbsp;&nbsp;Template Style - 02 </option>
                                                                 <option value="style3">&nbsp;&nbsp;Template Style - 03</option>
                                                                 <option value="style4">&nbsp;&nbsp;Template Style - 04</option>
                                                                 <option value="style5">&nbsp;&nbsp;Template Style - 05</option>
