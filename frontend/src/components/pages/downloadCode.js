@@ -114,21 +114,14 @@ export default class downloadCodePage extends Component {
                             <br /><br /><br /><br />
                             <center>
                                 <div class="card bg-light text-dark" style={{ width: '1000px' }}>
-                                <div class="alert alert-secondary" role="alert" style={{ color: 'white', fontFamily: 'Noto Sans, sans-serif' }}>
+                                    <div class="alert alert-secondary" role="alert" style={{ color: 'white', fontFamily: 'Noto Sans, sans-serif' }}>
                                         If you wish to download the generated frontend code with CSS click the below button.
                                     </div>
                                     <div class="card-body">
                                         <center><img style={{ width: '100px', height: '100px' }} src={download} class="navbar-brand-img h-100" alt="step3" /></center><br />
                                         <center>
-                                            <div class="btn-group dropright">
-                                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    Download Frontend Code
-                                                </button>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <button class="dropdown-item" type="button">Download</button>
-                                                    <button class="dropdown-item" type="button">Download Zip File</button>
-                                                </div>
-                                            </div></center><br />
+                                        <button className="btn btn-primary" style={{ width: '25%' }}>Download Frontend Code</button>
+                                            </center><br />
                                     </div>
                                 </div></center>
                             <br /><br /><br /><br /><br />
