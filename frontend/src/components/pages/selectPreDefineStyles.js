@@ -15,6 +15,7 @@ import Axios from 'axios';
 
 const initialStates = {
     "templateDetails": [],
+    "formBackgroundColor": ''
 }
 export default class preDefineStylesPage extends Component {
 
@@ -38,7 +39,6 @@ export default class preDefineStylesPage extends Component {
                 alert('Template has no details');
             }else{
                 console.log(result.data.data)
-                console.log('VALUE : ',this.state.templateDetails);
             }
 
         }).then(() => {}).catch(error => {
@@ -187,7 +187,184 @@ export default class preDefineStylesPage extends Component {
                                             <div class="card bg-light text-dark" style={{ width: '800px', height: '550px' }}>
                                                 <div class="card-body" style={{ backgroundColor: 'white' }}>
                                                     <div class="container">
-                                                        <form class="form-inline" onSubmit={this.onSubmit}>
+                                                        <h3>Style Form</h3><br />
+                                                        <select name="templateStyle" onChange={this.handleTemplateSelect} id="templateStyle" style={{ width: '100%', height: '50px', borderColor: '#e0dada', borderRadius: '6px', backgroundColor: '#dce6df' }}>
+                                                            <option disabled selected value>&nbsp;&nbsp;Select Template Style</option>
+                                                            <option value="style1">&nbsp;&nbsp;Template Style - 01</option>
+                                                            <option value="template02">&nbsp;&nbsp;Template Style - 02 </option>
+                                                            <option value="style3">&nbsp;&nbsp;Template Style - 03</option>
+                                                            <option value="style4">&nbsp;&nbsp;Template Style - 04</option>
+                                                            <option value="style5">&nbsp;&nbsp;Template Style - 05</option>
+                                                        </select><br /><br />
+                                                        {this.state.templateDetails.length > 0 && this.state.templateDetails.map((item, index) => {
+                                                           return(
+                                                               <div key={index}>
+                                                                    <form class="form-inline" onSubmit={this.onSubmit}>
+                                                                        {/* <h3>Style Form</h3><br />
+                                                                        <select name="templateStyle" onChange={this.handleTemplateSelect} id="templateStyle" style={{ width: '100%', height: '50px', borderColor: '#e0dada', borderRadius: '6px', backgroundColor: '#dce6df' }}>
+                                                                            <option disabled selected value>&nbsp;&nbsp;Select Template Style</option>
+                                                                            <option value="style1">&nbsp;&nbsp;Template Style - 01</option>
+                                                                            <option value="template02">&nbsp;&nbsp;Template Style - 02 </option>
+                                                                            <option value="style3">&nbsp;&nbsp;Template Style - 03</option>
+                                                                            <option value="style4">&nbsp;&nbsp;Template Style - 04</option>
+                                                                            <option value="style5">&nbsp;&nbsp;Template Style - 05</option>
+                                                                        </select><br /><br /> */}
+                                                                        <div class="row">
+                                                                            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                                                                                <p><b>Styling Form - </b></p>
+                                                                            </div>
+                                                                            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                                                                                <label for="form">Background Color</label><br />
+                                                                                <input
+                                                                                    type="color"
+                                                                                    id="formBackgroundColor"
+                                                                                    name="formBackgroundColor"
+                                                                                    defaultValue={item.formBackgroundColor}
+                                                                                    style={{ width: '30%', height: '38%', borderColor: '#e0dada' }}
+                                                                                />
+                                                                            </div>
+                                                                            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                                                                                <label for="form">Border Color</label><br />
+                                                                                <input
+                                                                                    type="color"
+                                                                                    id="formBorderColor"
+                                                                                    name="formBorderColor"
+                                                                                    defaultValue={item.formBorderColor}
+                                                                                    style={{ width: '30%', height: '38%', borderColor: '#e0dada' }}
+                                                                                />
+                                                                            </div>
+                                                                            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                                                                                <label for="pwd">Other Border Styles</label>
+                                                                                <br />
+                                                                                <select name="formBorderSize" id="formBorderSize" style={{ width: '40%', height: '40%', borderColor: '#e0dada', borderRadius: '6px' }}>
+                                                                                    <option>{item.formBorderSize}</option>
+                                                                                </select>&nbsp;&nbsp;
+                                                                                <select name="formBorderPatten" id="formBorderPatten" style={{ width: '50%', height: '40%', borderColor: '#e0dada', borderRadius: '6px' }}>
+                                                                                    <option>{item.formBorderPatten}</option>
+                                                                                </select>
+                                                                            </div><br />
+                                                                            <br /><br /><br /><hr /><br />
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                                                                                <p><b>Styling Header - </b></p>
+                                                                            </div>
+                                                                            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                                                                                <label for="form">Font Size (px)</label><br />
+                                                                                <select name="headerFontSize" id="headerFontSize" style={{ width: '80%', height: '40%', borderColor: '#e0dada', borderRadius: '6px' }}>
+                                                                                    <option>{item.headerFontSize}</option>
+                                                                                </select>
+                                                                            </div>
+                                                                            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                                                                                <label for="pwd">Bold/Unbold</label><br />
+                                                                                <select name="headerBold" id="headerBold" style={{ width: '80%', height: '40%', borderColor: '#e0dada', borderRadius: '6px' }}>
+                                                                                    <option>{item.headerBold}</option>
+                                                                                </select>
+                                                                                <br /><br /><br />
+                                                                            </div>
+                                                                            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                                                                                <label for="pwd">Font Color</label><br />
+                                                                                <input
+                                                                                    type="color"
+                                                                                    id="headerFontColor"
+                                                                                    name="headerFontColor"
+                                                                                    defaultValue={item.headerFontColor}
+                                                                                    style={{ width: '30%', height: '38%', borderColor: '#e0dada' }}
+                                                                                /><br />
+                                                                            </div>
+                                                                            <br /><hr /><br />
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                                                                                <p><b>Styling Label - </b></p>
+                                                                            </div>
+                                                                            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                                                                                <label for="form">Font Size (px)</label><br />
+                                                                                <select name="labelFontSize" id="labelFontSize" style={{ width: '80%', height: '40%', borderColor: '#e0dada', borderRadius: '6px' }}>
+                                                                                    <option>{item.labelFontSize}</option>
+                                                                                </select>
+                                                                            </div>
+                                                                            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                                                                                <label for="pwd">Font Color</label><br />
+                                                                                <input
+                                                                                    type="color"
+                                                                                    id="labelFontColor"
+                                                                                    name="labelFontColor"
+                                                                                    defaultValue={item.labelFontColor}
+                                                                                    style={{ width: '30%', height: '38%', borderColor: '#e0dada' }}
+                                                                                /><br /><br /><br />
+                                                                            </div>
+                                                                            <br /><hr /><br />
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                                                                                <p><b>Styling Input Field - </b></p>
+                                                                            </div>
+                                                                            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                                                                                <label for="form">Border Color</label><br />
+                                                                                <input
+                                                                                    type="color"
+                                                                                    id="inputBorderColor"
+                                                                                    name="inputBorderColor"
+                                                                                    defaultValue={item.inputBorderColor}
+                                                                                    style={{ width: '30%', height: '38%', borderColor: '#e0dada' }}
+                                                                                />
+                                                                            </div>
+                                                                            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                                                                                <label for="pwd">Other Border Styles</label>
+                                                                                <br />
+                                                                                <select name="inputBorderSize" id="inputBorderSize" style={{ width: '40%', height: '40%', borderColor: '#e0dada', borderRadius: '6px' }}>
+                                                                                    <option>{item.inputBorderSize}</option>
+                                                                                </select>&nbsp;&nbsp;
+                                                                                <select name="inputBorderPattern" id="inputBorderPattern" style={{ width: '50%', height: '40%', borderColor: '#e0dada', borderRadius: '6px' }}>
+                                                                                    <option>{item.inputBorderPattern}</option>
+                                                                                </select>
+                                                                            </div>
+                                                                            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                                                                                <label for="form">Border Radius</label><br />
+                                                                                <select name="inputBorderRadius" id="inputBorderRadius" style={{ width: '80%', height: '50%', borderColor: '#e0dada', borderRadius: '6px' }}>
+                                                                                    <option>{item.inputBorderRadius}</option>
+                                                                                </select><br /><br />
+                                                                            </div>
+                                                                            <br />
+                                                                            <br /><br /><br /><hr /><br />
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                                                                                <p><b>Styling Button - </b></p>
+                                                                            </div>
+                                                                            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                                                                                <label for="form">Background Color</label><br />
+                                                                                <input
+                                                                                    type="color"
+                                                                                    id="buttonBackgroundColor"
+                                                                                    name="buttonBackgroundColor"
+                                                                                    defaultValue={item.buttonBackgroundColor}
+                                                                                    style={{ width: '30%', height: '50%', borderColor: '#e0dada' }}
+                                                                                />
+                                                                            </div>
+                                                                            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                                                                                <label for="form">Font Color</label><br />
+                                                                                <input
+                                                                                    type="color"
+                                                                                    id="buttonFontColor"
+                                                                                    name="buttonFontColor"
+                                                                                    defaultValue={item.buttonFontColor}
+                                                                                    style={{ width: '30%', height: '50%', borderColor: '#e0dada' }}
+                                                                                />
+                                                                            </div>
+                                                                            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                                                                                <label for="form">Button Border Radius</label><br />
+                                                                                <select name="buttonBorderRadius" id="buttonBorderRadius" style={{ width: '80%', height: '50%', borderColor: '#e0dada', borderRadius: '6px' }}>
+                                                                                    <option>{item.buttonBorderRadius}</option>
+                                                                                </select><br /><br />
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>
+                                                               </div>
+                                                           ) 
+                                                        })}
+                                                        {/* <form class="form-inline" onSubmit={this.onSubmit}>
                                                             <h3>Style Form</h3><br />
                                                             <select name="templateStyle" onChange={this.handleTemplateSelect} id="templateStyle" style={{ width: '100%', height: '50px', borderColor: '#e0dada', borderRadius: '6px', backgroundColor: '#dce6df' }}>
                                                                 <option disabled selected value>&nbsp;&nbsp;Select Template Style</option>
@@ -207,6 +384,7 @@ export default class preDefineStylesPage extends Component {
                                                                         type="color"
                                                                         id="formBackgroundColor"
                                                                         name="formBackgroundColor"
+                                                                        defaultValue={this.state.formBackgroundColor}
                                                                         style={{ width: '30%', height: '38%', borderColor: '#e0dada' }}
                                                                     />
                                                                 </div>
@@ -372,7 +550,7 @@ export default class preDefineStylesPage extends Component {
                                                                     </select><br /><br />
                                                                 </div>
                                                             </div>
-                                                        </form>
+                                                        </form> */}
                                                     </div>
                                                 </div>
                                             </div>
