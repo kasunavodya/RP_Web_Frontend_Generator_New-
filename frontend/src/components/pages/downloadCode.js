@@ -4,9 +4,11 @@ import step1 from '../../assets/img/1.png';
 import step2 from '../../assets/img/2.png';
 import step3 from '../../assets/img/3.png';
 import step4 from '../../assets/img/4.png';
-import download from '../../assets/img/downloadIcon.png';
+// import download from '../../assets/img/downloadIcon.png';
+import style3 from '../../assets/img/style3.jpg';
 
 export default class downloadCodePage extends Component {
+
     render() {
         return (
             <div>
@@ -118,10 +120,11 @@ export default class downloadCodePage extends Component {
                                         If you wish to download the generated frontend code with CSS click the below button.
                                     </div>
                                     <div class="card-body">
-                                        <center><img style={{ width: '100px', height: '100px' }} src={download} class="navbar-brand-img h-100" alt="step3" /></center><br />
+                                        <center><img style={{ width: '250px', height: '250px' }} src={style3} class="navbar-brand-img h-100" alt="step3" /></center><br />
+                                        {/* <center><img style={{ width: '70px', height: '70px', marginTop: '-10px'}} src={download} class="navbar-brand-img h-100" alt="step3" /></center><br /> */}
                                         <center>
-                                        <button className="btn btn-primary" style={{ width: '25%' }}>Download Frontend Code</button>
-                                            </center><br />
+                                            <button onClick={this.downloadTxtFile} className="btn btn-primary" style={{ width: '25%' }}>Download Frontend Code</button>
+                                        </center><br />
                                     </div>
                                 </div></center>
                             <br /><br /><br /><br /><br />

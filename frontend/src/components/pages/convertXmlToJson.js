@@ -9,11 +9,12 @@ import '../../assets/css/xmlToJson.css';
 import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios';
 
 const initialStates = {
     file: '',
     xmlFile: '  No any XML File here...',
-    jsonFile: '  No any JSON File here...'
+    jsonFile: '  No any JSON File here...',
 }
 
 export default class convertXmlToJsonPage extends Component {
@@ -44,17 +45,23 @@ export default class convertXmlToJsonPage extends Component {
         //alert('File Uploaded Successfully!!', this.state.file);
         document.getElementById("submitBtn").disabled = false;
 
-        // const storageRef = firebase.storage().ref();
-        // const fileRef = storageRef.child(file.name);
+    };
 
-        // await fileRef.put(file).then(() => {
-        // }).catch(error => {
-        //     alert(error.message);
-        // });
+    submitJSONFile = (e) => {
+        e.preventDefault();
 
-        // const downloadURL = await fileRef.getDownloadURL();
-        // this.setState({ xmlFile: downloadURL });
-        // alert('File Uploaded Successfully!!', file.name);
+        const data = new FormData();
+
+        data.append('file', this.state.file)
+
+        axios.post('http://localhost:3001/uploadFile/upload', data)
+            .then((e) => {
+                toast.success('JSON File Uploaded Successfully.');
+                console.log(e.data.file);
+            })
+            .catch((e) => {
+                toast.error('JSON File Upload Error')
+            })
     }
 
     onSubmit(e) {
@@ -126,15 +133,6 @@ export default class convertXmlToJsonPage extends Component {
             .catch((e) => {
                 console.log('Error :', e);
             })
-
-
-        // Axios.get(`http://localhost:3001/convertToJson/XmlToJson/${xml}`)
-        // .then((data) => {
-        //     console.log('RESULT :', data);
-        // })
-        // .catch((e) => {
-        //     console.log('Error :', e);
-        // })
 
     }
 
@@ -279,7 +277,7 @@ export default class convertXmlToJsonPage extends Component {
                                                         </div>
                                                     </div>
                                                     <button type="submit" className="btn btn-primary" id="xmlToJSON" onClick={this.convertXMLToJSONFormat} style={{ marginTop: "-620px", width: "200px" }}>Convert XML to JSON</button><br /><br />
-                                                    <button type="submit" className="btn btn-primary" style={{ marginTop: "-590px", width: "200px" }}>Submit JSON File</button>
+                                                    <button type="submit" className="btn btn-primary" onClick={this.submitJSONFile} style={{ marginTop: "-590px", width: "200px" }}>Submit JSON File</button>
                                                 </form>
                                             </center>
                                         </div>

@@ -1,0 +1,19 @@
+<Window x:Name="LoginScreen" x:Class="TestPro.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TestPro"
+        mc:Ignorable="d">
+    <StackPanel Margin="300,150,293,83" Width="350">
+		<Form x:Type="form">
+			<Label x:type="header" Name="FormHeading" Content="Login Form" FontSize="18" HorizontalAlignment="Center"/>
+			<Separator x:type="horizontal-line" Margin="0,2,0,10"></Separator>
+			<Label x:type="label" Name="usernameTxt" Content="Username" Margin="15,15,15,0"></Label>
+			<TextBox x:type="input" x:Name="usrTextBox" Height="25" Margin="15,0,15,0" />
+			<Label x:type="label" Name="passwordTxt" Content="Password" Margin="15,15,15,0"></Label>
+			<TextBox x:type="input" Name="pwdTextBox" Margin="15,0,15,40" Height="25" />
+			<Button x:type="button" x:Name="submitBtm" Content="Login" Width="150" Height="25" />
+		</Form>
+    </StackPanel>
+</Window>
