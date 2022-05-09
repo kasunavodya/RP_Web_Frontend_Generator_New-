@@ -2,6 +2,12 @@ const mongoose = require('mongoose');
 
 const TemplateStyleSchema = new mongoose.Schema({
 
+    templateName: { 
+        type: String,
+        required: true,
+        trim: true 
+    },
+
     //Form Styles
     formBackgroundColor: { 
         type: String,
