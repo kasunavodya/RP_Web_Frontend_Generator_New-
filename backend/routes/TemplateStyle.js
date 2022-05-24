@@ -31,19 +31,20 @@ router.route("/updateTemplateDetails/:id").put(async (req, res) => {
     //Updating the template details
     const formBackgroundColor = req.body.formBackgroundColor;
     const formBorderColor = req.body.formBorderColor;
+    const formBorderSize = req.body.formBorderSize;
+    const formBorderPatten = req.body.formBorderPatten;
+    const headerFontSize = req.body.headerFontSize;
+    const headerBold = req.body.headerBold;
     const headerFontColor = req.body.headerFontColor;
+    const labelFontSize = req.body.labelFontSize;
     const labelFontColor = req.body.labelFontColor;
     const inputBorderColor = req.body.inputBorderColor;
+    const inputBorderSize = req.body.inputBorderSize;
+    const inputBorderPattern = req.body.inputBorderPattern;
+    const inputBorderRadius = req.body.inputBorderRadius;
     const buttonBackgroundColor = req.body.buttonBackgroundColor;
     const buttonFontColor = req.body.buttonFontColor;
-
-    console.log('1', formBackgroundColor);
-    console.log('2', formBorderColor);
-    console.log('3', headerFontColor);
-    console.log('4', labelFontColor);
-    console.log('5', inputBorderColor);
-    console.log('6', buttonBackgroundColor);
-    console.log('7', buttonFontColor);
+    const buttonBorderRadius = req.body.buttonBorderRadius;
 
     //template ID
     const Id = req.params.id;
@@ -52,11 +53,20 @@ router.route("/updateTemplateDetails/:id").put(async (req, res) => {
         await TemplateStyleModel.findOne(Id, (err, updatedTemplateObject) => {
             updatedTemplateObject.formBackgroundColor = formBackgroundColor;
             updatedTemplateObject.formBorderColor = formBorderColor;
+            updatedTemplateObject.formBorderSize = formBorderSize;
+            updatedTemplateObject.formBorderPatten = formBorderPatten;
+            updatedTemplateObject.headerFontSize = headerFontSize;
+            updatedTemplateObject.headerBold = headerBold;
             updatedTemplateObject.headerFontColor = headerFontColor;
+            updatedTemplateObject.labelFontSize = labelFontSize;
             updatedTemplateObject.labelFontColor = labelFontColor;
             updatedTemplateObject.inputBorderColor = inputBorderColor;
+            updatedTemplateObject.inputBorderSize = inputBorderSize;
+            updatedTemplateObject.inputBorderPattern = inputBorderPattern;
+            updatedTemplateObject.inputBorderRadius = inputBorderRadius;
             updatedTemplateObject.buttonBackgroundColor = buttonBackgroundColor;
             updatedTemplateObject.buttonFontColor = buttonFontColor;
+            updatedTemplateObject.buttonBorderRadius = buttonBorderRadius;
 
             updatedTemplateObject.save()
                 .then(data => {
