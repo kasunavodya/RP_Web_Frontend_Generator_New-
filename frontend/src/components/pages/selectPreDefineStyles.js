@@ -19,6 +19,9 @@
  import style6 from '../../assets/img/style6.jpg';
  import '../../assets/css/preDefineStyles.css';
  import '../../assets/css/image-zoom.css'
+ import { toast } from 'react-toastify';
+ import { ToastContainer } from 'react-toastify';
+ import 'react-toastify/dist/ReactToastify.css';
  import Axios from 'axios';
  
  const initialStates = {
@@ -66,45 +69,35 @@
                  //console.log('RESULT >>', result.data.dataresult.data.data);
                  this.setState({ templateDetails: result.data.data });
  
-                 if (result.data.data.at(0) != null) {
-                     this.setState({ formBackgroundColor: result.data.data.at(0).formBackgroundColor });
-                     this.setState({ formBorderColor: result.data.data.at(0).formBorderColor });
-                     this.setState({ formBorderSize: result.data.data.at(0).formBorderSize });
-                     this.setState({ formBorderPatten: result.data.data.at(0).formBorderPatten });
-                     this.setState({ headerFontSize: result.data.data.at(0).headerFontSize });
-                     this.setState({ headerBold: result.data.data.at(0).headerBold });
-                     this.setState({ headerFontColor: result.data.data.at(0).headerFontColor });
-                     this.setState({ labelFontSize: result.data.data.at(0).labelFontSize });
-                     this.setState({ labelFontColor: result.data.data.at(0).labelFontColor });
-                     this.setState({ inputBorderColor: result.data.data.at(0).inputBorderColor });
-                     this.setState({ inputBorderSize: result.data.data.at(0).inputBorderSize });
-                     this.setState({ inputBorderPattern: result.data.data.at(0).inputBorderPattern });
-                     this.setState({ inputBorderRadius: result.data.data.at(0).inputBorderRadius });
-                     this.setState({ buttonBackgroundColor: result.data.data.at(0).buttonBackgroundColor });
-                     this.setState({ buttonFontColor: result.data.data.at(0).buttonFontColor });
-                     this.setState({ buttonBorderRadius: result.data.data.at(0).buttonBorderRadius });
-                        console.log(result.data.data.at(0).formBackgroundColor);
-                        console.log(result.data.data.at(0).formBorderColor);
-                        console.log(result.data.data.at(0).formBorderSize);
-                        console.log(result.data.data.at(0).formBorderPatten);
-                        console.log(result.data.data.at(0).headerFontSize);
-                        console.log(result.data.data.at(0).headerBold);
-                        console.log(result.data.data.at(0).headerFontColor);
-                        console.log(result.data.data.at(0).labelFontSize);
-                        console.log(result.data.data.at(0).labelFontColor);
-                        console.log(result.data.data.at(0).inputBorderColor);
-                        console.log(result.data.data.at(0).inputBorderSize);
-                        console.log(result.data.data.at(0).inputBorderPattern);
-                        console.log(result.data.data.at(0).inputBorderRadius);
-                        console.log(result.data.data.at(0).buttonBackgroundColor);
-                        console.log(result.data.data.at(0).buttonFontColor);
-                        console.log(result.data.data.at(0).buttonBorderRadius);
-                 }
+ 
  
                  if (result.data.data.length == 0) {
                      alert('Template has no details');
                  } else {
                      //console.log(result.data.data)
+ 
+                     if (result.data.data.at(0) != null) {
+                         this.setState({ formBackgroundColor: result.data.data.at(0).formBackgroundColor });
+                         this.setState({ formBorderColor: result.data.data.at(0).formBorderColor });
+                         this.setState({ formBorderSize: result.data.data.at(0).formBorderSize });
+                         this.setState({ formBorderPatten: result.data.data.at(0).formBorderPatten });
+                         this.setState({ headerFontSize: result.data.data.at(0).headerFontSize });
+                         this.setState({ headerBold: result.data.data.at(0).headerBold });
+                         this.setState({ headerFontColor: result.data.data.at(0).headerFontColor });
+                         this.setState({ labelFontSize: result.data.data.at(0).labelFontSize });
+                         this.setState({ labelFontColor: result.data.data.at(0).labelFontColor });
+                         this.setState({ inputBorderColor: result.data.data.at(0).inputBorderColor });
+                         this.setState({ inputBorderSize: result.data.data.at(0).inputBorderSize });
+                         this.setState({ inputBorderPattern: result.data.data.at(0).inputBorderPattern });
+                         this.setState({ inputBorderRadius: result.data.data.at(0).inputBorderRadius });
+                         this.setState({ buttonBackgroundColor: result.data.data.at(0).buttonBackgroundColor });
+                         this.setState({ buttonFontColor: result.data.data.at(0).buttonFontColor });
+                         this.setState({ buttonBorderRadius: result.data.data.at(0).buttonBorderRadius });
+                         console.log("DATA : ", this.state.buttonBorderRadius);
+                     } else {
+                         console.log('Error in seting value!');
+                     }
+ 
                  }
  
              }).catch(error => {
@@ -123,7 +116,7 @@
       */
      onChange(e) {
          e.persist();
-         this.setState({ [e.target.name]: e.target.defaultValue });
+         this.setState({ [e.target.name]: e.target.value });
      }
  
      onSubmit(e) {
@@ -163,9 +156,11 @@
          */
          Axios.put(`http://localhost:3001/templateStyle/updateTemplateDetails/${ID}`, updateTemplateDetails)
              .then(response => {
-                 alert('Template Style Details Updated Successfully');
+                 toast.success('Style Details Updated Successfully');
+                 //alert('Template Style Details Updated Successfully');
              }).catch(error => {
-                 alert(error.message);
+                 toast.error(error.message);
+                 //alert(error.message);
              })
      }
  
@@ -308,6 +303,7 @@
                                          <center>
                                              <div class="card bg-light text-dark" style={{ width: '800px', height: '550px' }}>
                                                  <div class="card-body" style={{ backgroundColor: 'white', border: 'groove' }}>
+                                                 <ToastContainer />
                                                      <div class="bg-img">
                                                          <div class="container">
                                                              <h3>Style Form</h3><br />
@@ -335,7 +331,7 @@
                                                                                          name="formBackgroundColor"
                                                                                          defaultValue={this.state.formBackgroundColor}
                                                                                          onChange={this.onChange}
-                                                                                         //value={this.state.formBackgroundColor}
+                                                                                         value={this.state.formBackgroundColor}
                                                                                          style={{ width: '30%', height: '38%', borderColor: '#e0dada' }}
                                                                                      />
                                                                                  </div>
@@ -345,20 +341,26 @@
                                                                                          type="color"
                                                                                          id="formBorderColor"
                                                                                          name="formBorderColor"
-                                                                                         defaultValue={item.formBorderColor}
+                                                                                         defaultValue={this.state.formBorderColor}
                                                                                          onChange={this.onChange}
-                                                                                         //value={this.state.formBorderColor}
+                                                                                         value={this.state.formBorderColor}
                                                                                          style={{ width: '30%', height: '38%', borderColor: '#e0dada' }}
                                                                                      />
                                                                                  </div>
                                                                                  <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
                                                                                      <label for="pwd">Other Border Styles</label>
                                                                                      <br />
-                                                                                     <select onChange={this.onChange} name="formBorderSize" id="formBorderSize" tyle={{ width: '40%', height: '40%', borderColor: '#e0dada', borderRadius: '6px' }}>
-                                                                                         <option>{item.formBorderSize}</option>
+                                                                                     <select onChange={this.onChange} defaultValue={this.state.formBorderSize} value={this.state.formBorderSize} name="formBorderSize" id="formBorderSize" tyle={{ width: '40%', height: '40%', borderColor: '#e0dada', borderRadius: '6px' }}>
+                                                                                         <option value="1px">1px</option>
+                                                                                         <option value="2px">2px</option>
+                                                                                         <option value="3px">3px</option>
                                                                                      </select>&nbsp;&nbsp;
-                                                                                     <select onChange={this.onChange} name="formBorderPatten" id="formBorderPatten" tyle={{ width: '50%', height: '40%', borderColor: '#e0dada', borderRadius: '6px' }}>
-                                                                                         <option>{item.formBorderPatten}</option>
+                                                                                     <select onChange={this.onChange} defaultValue={this.state.formBorderPatten} value={this.state.formBorderPatten} name="formBorderPatten" id="formBorderPatten" tyle={{ width: '50%', height: '40%', borderColor: '#e0dada', borderRadius: '6px' }}>
+                                                                                         <option value="solid">solid</option>
+                                                                                         <option value="groove">groove</option>
+                                                                                         <option value="ridge">ridge</option>
+                                                                                         <option value="inset">inset</option>
+                                                                                         <option value="outset">outset</option>
                                                                                      </select>
                                                                                  </div><br />
                                                                                  <br /><br /><br /><hr /><br />
@@ -369,14 +371,17 @@
                                                                                  </div>
                                                                                  <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
                                                                                      <label for="form">Font Size (px)</label><br />
-                                                                                     <select onChange={this.onChange} name="headerFontSize" id="headerFontSize" style={{ width: '80%', height: '40%', borderColor: '#e0dada', borderRadius: '6px' }}>
-                                                                                         <option>{item.headerFontSize}</option>
+                                                                                     <select onChange={this.onChange} defaultValue={this.state.headerFontSize} value={this.state.headerFontSize} name="headerFontSize" id="headerFontSize" style={{ width: '80%', height: '40%', borderColor: '#e0dada', borderRadius: '6px' }}>
+                                                                                         <option value="h1">h1</option>
+                                                                                         <option value="h2">h2</option>
+                                                                                         <option value="h3">h3</option>
                                                                                      </select>
                                                                                  </div>
                                                                                  <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
                                                                                      <label for="pwd">Bold/Unbold</label><br />
-                                                                                     <select onChange={this.onChange} name="headerBold" id="headerBold" tyle={{ width: '80%', height: '40%', borderColor: '#e0dada', borderRadius: '6px' }}>
-                                                                                         <option>{item.headerBold}</option>
+                                                                                     <select onChange={this.onChange} defaultValue={this.state.headerBold} value={this.state.headerBold} name="headerBold" id="headerBold" tyle={{ width: '80%', height: '40%', borderColor: '#e0dada', borderRadius: '6px' }}>
+                                                                                         <option value="b">bold</option>
+                                                                                         <option value="non">non</option>
                                                                                      </select>
                                                                                      <br /><br /><br />
                                                                                  </div>
@@ -386,9 +391,9 @@
                                                                                          type="color"
                                                                                          id="headerFontColor"
                                                                                          name="headerFontColor"
-                                                                                         defaultValue={item.headerFontColor}
+                                                                                         defaultValue={this.state.headerFontColor}
                                                                                          onChange={this.onChange}
-                                                                                         //value={this.state.headerFontColor}
+                                                                                         value={this.state.headerFontColor}
                                                                                          style={{ width: '30%', height: '38%', borderColor: '#e0dada' }}
                                                                                      /><br />
                                                                                  </div>
@@ -400,8 +405,12 @@
                                                                                  </div>
                                                                                  <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
                                                                                      <label for="form">Font Size (px)</label><br />
-                                                                                     <select onChange={this.onChange} name="labelFontSize" id="labelFontSize" style={{ width: '80%', height: '40%', borderColor: '#e0dada', borderRadius: '6px' }}>
-                                                                                         <option>{item.labelFontSize}</option>
+                                                                                     <select onChange={this.onChange} defaultValue={this.state.labelFontSize} value={this.state.labelFontSize} name="labelFontSize" id="labelFontSize" style={{ width: '80%', height: '40%', borderColor: '#e0dada', borderRadius: '6px' }}>
+                                                                                         <option value="14px">14px</option>
+                                                                                         <option value="15px">15px</option>
+                                                                                         <option value="16px">16px</option>
+                                                                                         <option value="17px">17px</option>
+                                                                                         <option value="18px">18px</option>
                                                                                      </select>
                                                                                  </div>
                                                                                  <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
@@ -410,9 +419,9 @@
                                                                                          type="color"
                                                                                          id="labelFontColor"
                                                                                          name="labelFontColor"
-                                                                                         defaultValue={item.labelFontColor}
+                                                                                         defaultValue={this.state.labelFontColor}
                                                                                          onChange={this.onChange}
-                                                                                         //value={this.state.labelFontColor}
+                                                                                         value={this.state.labelFontColor}
                                                                                          style={{ width: '30%', height: '38%', borderColor: '#e0dada' }}
                                                                                      /><br /><br /><br />
                                                                                  </div>
@@ -428,26 +437,32 @@
                                                                                          type="color"
                                                                                          id="inputBorderColor"
                                                                                          name="inputBorderColor"
-                                                                                         defaultValue={item.inputBorderColor}
+                                                                                         defaultValue={this.state.inputBorderColor}
                                                                                          onChange={this.onChange}
-                                                                                         //value={this.state.inputBorderColor}
+                                                                                         value={this.state.inputBorderColor}
                                                                                          style={{ width: '30%', height: '38%', borderColor: '#e0dada' }}
                                                                                      />
                                                                                  </div>
                                                                                  <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
                                                                                      <label for="pwd">Other Border Styles</label>
                                                                                      <br />
-                                                                                     <select onChange={this.onChange} name="inputBorderSize" id="inputBorderSize" style={{ width: '40%', height: '40%', borderColor: '#e0dada', borderRadius: '6px' }}>
-                                                                                         <option>{item.inputBorderSize}</option>
+                                                                                     <select onChange={this.onChange} defaultValue={this.state.inputBorderSize} value={this.state.inputBorderSize} name="inputBorderSize" id="inputBorderSize" style={{ width: '40%', height: '40%', borderColor: '#e0dada', borderRadius: '6px' }}>
+                                                                                         <option value="1px">1px</option>
+                                                                                         <option value="2px">2px</option>
+                                                                                         <option value="3px">3px</option>
                                                                                      </select>&nbsp;&nbsp;
-                                                                                     <select onChange={this.onChange} name="inputBorderPattern" id="inputBorderPattern" style={{ width: '50%', height: '40%', borderColor: '#e0dada', borderRadius: '6px' }}>
-                                                                                         <option>{item.inputBorderPattern}</option>
+                                                                                     <select onChange={this.onChange} defaultValue={this.state.inputBorderPattern} value={this.state.inputBorderPattern} name="inputBorderPattern" id="inputBorderPattern" style={{ width: '50%', height: '40%', borderColor: '#e0dada', borderRadius: '6px' }}>
+                                                                                         <option value="solid">solid</option>
+                                                                                         <option value="groove">groove</option>
+                                                                                         <option value="ridge">ridge</option>
                                                                                      </select>
                                                                                  </div>
                                                                                  <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
                                                                                      <label for="form">Border Radius</label><br />
-                                                                                     <select onChange={this.onChange} name="inputBorderRadius" id="inputBorderRadius" style={{ width: '80%', height: '50%', borderColor: '#e0dada', borderRadius: '6px' }}>
-                                                                                         <option>{item.inputBorderRadius}</option>
+                                                                                     <select onChange={this.onChange} defaultValue={this.state.inputBorderRadius} value={this.state.inputBorderRadius} name="inputBorderRadius" id="inputBorderRadius" style={{ width: '80%', height: '50%', borderColor: '#e0dada', borderRadius: '6px' }}>
+                                                                                         <option value="6px">6px</option>
+                                                                                         <option value="7px">7px</option>
+                                                                                         <option value="8px">8px</option>
                                                                                      </select><br /><br />
                                                                                  </div>
                                                                                  <br />
@@ -463,9 +478,9 @@
                                                                                          type="color"
                                                                                          id="buttonBackgroundColor"
                                                                                          name="buttonBackgroundColor"
-                                                                                         defaultValue={item.buttonBackgroundColor}
+                                                                                         defaultValue={this.state.buttonBackgroundColor}
                                                                                          onChange={this.onChange}
-                                                                                         //value={this.state.buttonBackgroundColor}
+                                                                                         value={this.state.buttonBackgroundColor}
                                                                                          style={{ width: '30%', height: '50%', borderColor: '#e0dada' }}
                                                                                      />
                                                                                  </div>
@@ -475,16 +490,18 @@
                                                                                          type="color"
                                                                                          id="buttonFontColor"
                                                                                          name="buttonFontColor"
-                                                                                         defaultValue={item.buttonFontColor}
+                                                                                         defaultValue={this.state.buttonFontColor}
                                                                                          onChange={this.onChange}
-                                                                                         //value={this.state.buttonFontColor}
+                                                                                         value={this.state.buttonFontColor}
                                                                                          style={{ width: '30%', height: '50%', borderColor: '#e0dada' }}
                                                                                      />
                                                                                  </div>
                                                                                  <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
                                                                                      <label for="form">Button Border Radius</label><br />
-                                                                                     <select onChange={this.onChange} name="buttonBorderRadius" id="buttonBorderRadius" style={{ width: '80%', height: '50%', borderColor: '#e0dada', borderRadius: '6px' }}>
-                                                                                         <option>{item.buttonBorderRadius}</option>
+                                                                                     <select onChange={this.onChange} defaultValue={this.state.buttonBorderRadius} value={this.state.buttonBorderRadius} name="buttonBorderRadius" id="buttonBorderRadius" style={{ width: '80%', height: '50%', borderColor: '#e0dada', borderRadius: '6px' }}>
+                                                                                         <option value="6px">6px</option>
+                                                                                         <option value="7px">7px</option>
+                                                                                         <option value="8px">8px</option>
                                                                                      </select><br /><br />
                                                                                  </div>
                                                                              </div>
