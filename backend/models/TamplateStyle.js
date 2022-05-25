@@ -1,6 +1,26 @@
+/**
+ * Model - TemplateStyle.js
+ * 
+ * Purpose - Template Style Model created to store the template style details on the database
+ * 
+ * Author - H.M. Kasuni Navodya(IT19144986)
+ *
+ */ 
+
+//Importing the mongoose from the installed package
 const mongoose = require('mongoose');
 
+/**
+ * Schema name (local) - TemplateStyleSchema
+ */
 const TemplateStyleSchema = new mongoose.Schema({
+    templateName: { 
+        type: String,
+        required: true,
+        trim: true 
+    },
+
+    //Template Name
     templateName: { 
         type: String,
         required: true,
@@ -64,7 +84,7 @@ const TemplateStyleSchema = new mongoose.Schema({
         trim: true 
     },
 
-    //Input Field Styles
+    //Input Feild Styles
     inputBorderColor: { 
         type: String,
         required: false,
@@ -110,5 +130,10 @@ const TemplateStyleSchema = new mongoose.Schema({
 
 });
 
+/**
+ * Schema name on the database - TemplateStyles
+ * 
+ * Exported model to be used on the TemplateStyle route
+ */
 const TemplateStyle = mongoose.model("TemplateStyles", TemplateStyleSchema);
 module.exports = TemplateStyle;

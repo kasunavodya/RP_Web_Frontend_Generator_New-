@@ -7,13 +7,10 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <Label x:type="header" Content="Login Form" HorizontalAlignment="Center" Margin="0,7,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="18"/>
-        <Rectangle x:type="form" HorizontalAlignment="Left" Height="342" Margin="134,0,0,0" Stroke="Black" VerticalAlignment="Center" Width="589"/>
-        <Label x:type="label1" Content="Username" HorizontalAlignment="Left" Margin="161,129,0,0" VerticalAlignment="Top"/>
-        <Label x:type="label2" Content="Password" HorizontalAlignment="Left" Margin="161,84,0,0" VerticalAlignment="Top"/>
-        <Button x:type="button" Content="Sign In" HorizontalAlignment="Left" Margin="395,351,0,0" VerticalAlignment="Top" Width="100" Background="#FF4D98F3"/>
+		<Rectangle type="form" HorizontalAlignment="Left" Height="342" Margin="134,0,0,0" Stroke="Black" VerticalAlignment="Center"/>
+        <Label type="header" Content="Login Form" HorizontalAlignment="Center" Margin="0,7,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center"/>
+        <Label type="label1" Content="Username" HorizontalAlignment="Left" Margin="161,129,0,0" VerticalAlignment="Top"/>
+        <Label type="label2" Content="Password" HorizontalAlignment="Left" Margin="161,84,0,0" VerticalAlignment="Top"/>
+        <Button type="button" Content="Login" HorizontalAlignment="Left" Margin="395,351,0,0" VerticalAlignment="Top"/>
    </Grid>
 </Window>
