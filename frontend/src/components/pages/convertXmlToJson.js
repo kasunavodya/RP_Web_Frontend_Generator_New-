@@ -33,11 +33,14 @@
          this.onFileUpload = this.onFileUpload.bind(this);
          this.onSubmit = this.onSubmit.bind(this);
          this.convertXMLToJSONFormat = this.convertXMLToJSONFormat.bind(this);
+         //this.navigateToPredefineTemplate = this.navigateToPredefineTemplate.bind(this);
          this.state = initialStates;
      }
  
      componentDidMount(e) {
          document.getElementById("submitBtn").disabled = true;
+         document.getElementById("xmlToJSON").disabled = true;
+         document.getElementById("submitData").disabled = true;
      }
  
      /**
@@ -57,6 +60,7 @@
          //Display toast message
          toast.success('File Uploaded Successfully!!', this.state.file);
          document.getElementById("submitBtn").disabled = false;
+         document.getElementById("xmlToJSON").disabled = false;
  
      };
  
@@ -116,6 +120,7 @@
  
          //alert('Hello!' + JSON.stringify(this.state.xmlFile));
          toast.success('Converted to JSON format successfully');
+         document.getElementById("submitData").disabled = false;
  
          var xml = this.state.xmlFile.toString();
          let pass = {
@@ -131,13 +136,30 @@
              .then((result) => {
                  console.log('RESULT :', result.data.data);
                  this.setState({ jsonFile: result.data.data });
-                 
+ 
+                 //add JSON to backend
+                 var jsonString = result.data.data.toString();
+                 let pass2 = {
+                     "json": jsonString
+                 }
+                 Axios.post('http://localhost:3001/convertToJson/addTableStructure', pass2)
+                 .then((result) => {
+                     console.log(result);
+                 })
+                 .catch((e) => {
+                     console.log('Error:', e);
+                 })
+ 
              })
              .catch((e) => {
                  console.log('Error :', e);
              })
  
      }
+ 
+     // navigateToPredefineTemplate(e) {
+     //     window.location = `/preDefineStyles/${this.state.jsonFile}`;
+     // }
  
      render() {
          return (
@@ -280,7 +302,7 @@
                                                          </div>
                                                      </div>
                                                      <button type="submit" className="btn btn-primary" id="xmlToJSON" onClick={this.convertXMLToJSONFormat} style={{ marginTop: "-620px", width: "200px" }}>Convert XML to JSON</button><br /><br />
-                                                     <button type="submit" className="btn btn-primary" onClick={this.submitJSONFile} style={{ marginTop: "-590px", width: "200px" }}>Submit JSON File</button>
+                                                     <button type="submit" className="btn btn-primary" id="submitData" onClick={this.submitJSONFile} style={{ marginTop: "-590px", width: "200px" }}>Submit JSON File</button>
                                                  </form>
                                              </center>
                                          </div>
@@ -288,6 +310,8 @@
                              </div><br />
                              <div class="col-12 text-end">
                                  <a class="btn bg-gradient-dark mb-0" href="/preDefineStyles">Next&nbsp;&nbsp;<i class="fas fa-arrow-right"></i></a>
+                                 {/* <a class="btn bg-gradient-dark mb-0" href={this.navigateToPredefineTemplate}>Next&nbsp;&nbsp;<i class="fas fa-arrow-right"></i></a> */}
+                                 {/* <button onClick={this.navigateToPredefineTemplate} class="btn bg-gradient-dark mb-0" type="button">Next&nbsp;&nbsp;<i class="fas fa-arrow-right"></i></button> */}
                              </div>
                          </div>
                      </main>

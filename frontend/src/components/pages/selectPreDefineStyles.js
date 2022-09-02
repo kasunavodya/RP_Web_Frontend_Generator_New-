@@ -25,7 +25,7 @@
  import Axios from 'axios';
  
  const initialStates = {
-     "templateDetails": [],
+     "templateDetails": [''],
      formBackgroundColor: '',
      formBorderColor: '',
      formBorderSize: '',
@@ -51,8 +51,14 @@
          this.handleTemplateSelect = this.handleTemplateSelect.bind(this);
          this.onChange = this.onChange.bind(this);
          this.onSubmit = this.onSubmit.bind(this);
+         this.navigateToDisplayResult = this.navigateToDisplayResult.bind(this);
          this.state = initialStates;
      }
+ 
+     //sanjay
+     // componentDidMount(){
+     //     console.log("JSON File", this.props.match.params.json);
+     // }
  
      handleTemplateSelect(e) {
          e.preventDefault();
@@ -72,7 +78,7 @@
  
  
                  if (result.data.data.length == 0) {
-                     alert('Template has no details');
+                     alert('Template has no details');   
                  } else {
                      //console.log(result.data.data)
  
@@ -162,6 +168,10 @@
                  toast.error(error.message);
                  //alert(error.message);
              })
+     }
+ 
+     navigateToDisplayResult(e) {
+         window.location = '/displayResult';
      }
  
      render() {
@@ -306,7 +316,7 @@
                                                  <ToastContainer />
                                                      <div class="bg-img">
                                                          <div class="container">
-                                                             <h3>Style Form</h3><br />
+                                                             <h3>STYLE FORM</h3><br />
                                                              <select name="templateStyle" onChange={this.handleTemplateSelect} id="templateStyle" style={{ width: '100%', height: '50px', borderColor: '#e0dada', borderRadius: '6px', backgroundColor: '#c8dbe8' }}>
                                                                  <option disabled selected value>&nbsp;&nbsp;Select Template Style</option>
                                                                  <option value="template01">&nbsp;&nbsp;Template Style - 01</option>
@@ -524,7 +534,8 @@
                              <div class="col-12 text-end">
                                  <a class="btn bg-gradient-dark mb-0" href="/convertXmltoJson"><i class="fas fa-arrow-left"></i>&nbsp;&nbsp;Back</a>
                                  &nbsp;&nbsp;&nbsp;
-                                 <a class="btn bg-gradient-dark mb-0" href="/displayResult">Next&nbsp;&nbsp;<i class="fas fa-arrow-right"></i></a>
+                                 {/* <a class="btn bg-gradient-dark mb-0" href="/displayResult">Next&nbsp;&nbsp;<i class="fas fa-arrow-right"></i></a> */}
+                                 <a class="btn bg-gradient-dark mb-0" onClick={this.navigateToDisplayResult}>Next&nbsp;&nbsp;<i class="fas fa-arrow-right"></i></a>
                              </div>
                          </div>
                      </main>
