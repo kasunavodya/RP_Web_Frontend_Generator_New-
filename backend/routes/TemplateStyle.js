@@ -69,7 +69,15 @@
      const buttonBackgroundColor = req.body.buttonBackgroundColor;
      const buttonFontColor = req.body.buttonFontColor;
      const buttonBorderRadius = req.body.buttonBorderRadius;
-  
+ 
+     console.log('1', formBackgroundColor);
+     // console.log('2', formBorderColor);
+     // console.log('3', headerFontColor);
+     // console.log('4', labelFontColor);
+     // console.log('5', inputBorderColor);
+     // console.log('6', buttonBackgroundColor);
+     // console.log('7', buttonFontColor);
+ 
      //template ID
      const Id = req.params.id;
  

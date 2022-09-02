@@ -16,9 +16,11 @@
  
  import sampleCode from '../../SampleCode/sampleCode.txt';
  import ReactUI from './ReactUI.js';
+ import Axios from 'axios';
  
  const initialStates = {
-     "code": ""
+     "code": '',
+     "json": [],
  }
  export default class displayResultPage extends Component {
  
@@ -28,16 +30,33 @@
      }
  
      //Fetch sample code and display code as a string
-     componentDidMount(e) {
-         let resultantCode = "";
+     componentDidMount() {
+ 
+         let jsonData = [];
  
          fetch(sampleCode)
              .then((res) => {
                  return res.text();
              }).then((data) => {
                  this.setState({ code: data.toString() });
-                 console.log('RESULT : ', this.state.code);
+                 //console.log('RESULT : ', this.state.code);
              });
+ 
+         Axios.get('http://localhost:3001/convertToJson/getTableStructure')
+             .then(response => {
+                 this.setState({json: response});
+                 jsonData = response.data; 
+                 //console.log('JSON response>>' , JSON.stringify(this.state.json));
+                 //console.log('JSON Links>>', jsonData);
+             }) 
+             .catch((e) => {  
+                 console.log('Error:', e);   
+                 alert(e.message);
+             })
+ 
+             jsonData.map((value, key) => {
+                 console.log('KEY>>',key);
+             })
      }
  
      render() {
@@ -146,8 +165,8 @@
                                  <div class="row">
                                      <div class="col-sm-6">
                                          <center><div class="alert alert-secondary" role="alert" style={{ color: 'white', fontFamily: 'Noto Sans, sans-serif' }}>
-                                             Display React Code <br/>
-                                            <i><p style = {{fontSize: '14px', color: 'black', backgroundColor: "#afe0ed", marginBottom: '-1px'}}><b>(NOTE: If you want the code screen to be in light mode, click on the code screen.)</b></p></i>
+                                             Display React Code <br />
+                                             <i><p style={{ fontSize: '14px', color: 'black', backgroundColor: "#afe0ed", marginBottom: '-1px' }}><b>(NOTE: If you want the code screen to be in light mode, click on the code screen.)</b></p></i>
                                          </div></center>
                                          <div>
                                              <textarea id="xmlString" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true" cols="55" rows="65" style={{ fontSize: 13, width: '100%', height: '530px' }} defaultValue={this.state.code}>
@@ -156,8 +175,8 @@
                                      </div>
                                      <div class="col-sm-6">
                                          <center><div class="alert alert-secondary" role="alert" style={{ color: 'white', fontFamily: 'Noto Sans, sans-serif' }}>
-                                             Display Result <br/>
-                                             <i><p style = {{fontSize: '13px', color: 'black', backgroundColor: "#afe0ed", marginBottom: '17px'}}></p></i>
+                                             Display Result <br />
+                                             <i><p style={{ fontSize: '13px', color: 'black', backgroundColor: "#afe0ed", marginBottom: '17px' }}></p></i>
                                          </div></center>
                                      </div>
                                  </div>
