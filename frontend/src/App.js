@@ -35,6 +35,7 @@ function App() {
             <Route path="/sampleReactCode" element={<SampleReactCodePage />} />
             <Route path="/convertXmltoJson" element={<ConvertXmlToJsonPage />} />
             <Route path="/preDefineStyles" element={<PreDefineStylesPage />} />
+            {/* <Route path="/preDefineStyles/:json" element={<PreDefineStylesPage />} /> */}
           </Routes>
         </section>
       </Router>
