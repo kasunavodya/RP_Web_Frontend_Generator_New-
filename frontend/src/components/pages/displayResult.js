@@ -20,44 +20,127 @@
  
  const initialStates = {
      "code": '',
-     "json": [],
+     "json": {},
+     "generatedCode": ''
  }
  export default class displayResultPage extends Component {
  
      constructor(props) {
          super(props);
          this.state = initialStates;
+         this.generateCode = this.generateCode.bind(this);
      }
  
      //Fetch sample code and display code as a string
+     //If the error continues change this to a method and bind in constructor.
      componentDidMount() {
- 
-         let jsonData = [];
- 
+
          fetch(sampleCode)
              .then((res) => {
                  return res.text();
              }).then((data) => {
                  this.setState({ code: data.toString() });
-                 //console.log('RESULT : ', this.state.code);
              });
  
          Axios.get('http://localhost:3001/convertToJson/getTableStructure')
              .then(response => {
-                 this.setState({json: response});
-                 jsonData = response.data; 
-                 //console.log('JSON response>>' , JSON.stringify(this.state.json));
-                 //console.log('JSON Links>>', jsonData);
+                 this.setState({ json: response.data });
+                 //console.log('JSON response>>' , JSON.stringify(response));
              }) 
              .catch((e) => {  
                  console.log('Error:', e);   
                  alert(e.message);
-             })
- 
-             jsonData.map((value, key) => {
-                 console.log('KEY>>',key);
-             })
+             });
      }
+
+     generateCode() {
+        let data = this.state.json;
+        const keys = Object.keys(data);
+
+        let tempObj = {};
+
+        keys.forEach((key, index) => {
+            tempObj = data[key];
+        });;
+
+        //console.log('DATA : ', tempObj[0].json);
+        let jsonStruct =  JSON.parse(tempObj[0].json);
+
+        console.log('DATA 2: ', jsonStruct.Window.Grid);
+
+        //Loop through list
+        let labelList = [];
+        let buttonList = [];
+        jsonStruct.Window.Grid.map(item => {
+            labelList = item.Label;
+            buttonList = item.Button;
+        });
+    
+        //CODE GENERATION START
+        let code = '<div className="' + jsonStruct.Window.$.Title + '">' + '\n';
+        code = code + '\t' + '<form style={{ }}>' + '\n';
+        
+        code = code + '\t\t' + '<div class="formContainer" style={{}}>' + '\n';
+        code = code + '\t\t\t' + '<h1 style={{ }}>' + jsonStruct.Window.$.Title + '</h1><hr/>' + '\n';
+        code = code + '\t\t' + '<div>' + '\n';
+
+        code = code + '\t\t' + '<div class="container" style={{}}>' + '\n';
+        //Label
+        for(let i = 0; i < labelList.length; i++){
+            code = code + this.generateCodeForLabel(labelList[i].$.Content);
+            code = code + this.generateCodeForInput(labelList[i].$.Content);
+            code = code + '\t\t\t' + '<br /><br />' + '\n';
+        }
+
+        //Button
+        for(let i = 0; i < buttonList.length; i++){
+            code = code + this.generateCodeForButton(buttonList[i].$.Content);
+        }
+        code = code + '\t\t\t' + '<br /><br /><br />' + '\n';
+        code = code + '\t\t' + '<div>' + '\n';
+        
+        code = code + '\t' + '</form>' + '\n';
+        code = code + '<div>';
+
+        //Get the generated Code
+        this.setState({ generatedCode: code });
+
+        this.generateCodeForLabel()
+
+    }
+
+    //Code generation for label
+    //Pass the style parameters as method params
+    generateCodeForLabel(labelName){
+        let labelCode = '\t\t\t' + '<label style={{ }}>' + '\n';
+        labelCode = labelCode + '\t\t\t\t' + '<b style={{ }}>' + labelName + '</b>' + '\n';
+        labelCode = labelCode + '\t\t\t' + '</label>' + '\n';
+
+        return labelCode;
+    }
+
+    //Code generation for input
+    //Pass the style parameters as method params
+    generateCodeForInput(labelName){
+        let inputCode = '\t\t\t' + '<input' + '\n';
+        inputCode = inputCode + '\t\t\t\t' + 'type="text"' + '\n';
+        inputCode = inputCode + '\t\t\t\t' + 'placeholder="Enter text"' + '\n';
+        inputCode = inputCode + '\t\t\t\t' + 'name="' + labelName + '"' + '\n';;
+        inputCode = inputCode + '\t\t\t\t' + 'required' + '\n';
+        inputCode = inputCode + '\t\t\t\t' + 'style={{ }}' + '\n';
+        inputCode = inputCode + '\t\t\t' + '/>' + '\n';
+
+        return inputCode;
+    }
+
+    //Code generation for Button
+    //Pass the style parameters as method params
+    generateCodeForButton(buttonName){
+        let buttonCode = '\t\t\t' + '<button type="submit" style={{ }}>' + buttonName + '</button>' + '\n';
+
+        return buttonCode;
+    }
+
  
      render() {
          return (
@@ -169,7 +252,7 @@
                                              <i><p style={{ fontSize: '14px', color: 'black', backgroundColor: "#afe0ed", marginBottom: '-1px' }}><b>(NOTE: If you want the code screen to be in light mode, click on the code screen.)</b></p></i>
                                          </div></center>
                                          <div>
-                                             <textarea id="xmlString" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true" cols="55" rows="65" style={{ fontSize: 13, width: '100%', height: '530px' }} defaultValue={this.state.code}>
+                                             <textarea id="xmlString" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true" cols="55" rows="65" style={{ fontSize: 13, width: '100%', height: '530px' }} defaultValue={this.state.generatedCode}>
                                              </textarea>
                                          </div>
                                      </div>
@@ -189,6 +272,7 @@
                                  <a class="btn bg-gradient-dark mb-0" href="/preDefineStyles"><i class="fas fa-arrow-left"></i>&nbsp;&nbsp;Back</a>
                                  &nbsp;&nbsp;&nbsp;
                                  <a class="btn bg-gradient-dark mb-0" href="/downloadCode">Next&nbsp;&nbsp;<i class="fas fa-arrow-right"></i></a>
+                                 <button onClick={this.generateCode}>Gen Code</button>
                              </div>
                          </div>
                      </main>
