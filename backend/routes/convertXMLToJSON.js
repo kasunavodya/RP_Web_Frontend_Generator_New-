@@ -60,5 +60,14 @@
              res.status(500).send({ error: error });
          })
  });
+
+ router.route('/deleteAllTableStructure').delete(async (req, res) => {
+    await TableStructureModel.remove()
+        .then(data => {
+            res.status(200).send({ data: data });
+        }).catch(error => {
+            res.status(500).send({ error: error });
+        })
+});
  
  module.exports = router;
